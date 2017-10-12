@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="espacio_normal">16dp</dimen>
+    <dimen name="espacio_poco">8dp</dimen>
+    <dimen name="home_bienvenido">30sp</dimen>
+</resources>

@@ -1,0 +1,30 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="com.victorsaico.shareddrawer.Fragments.HomeFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:gravity="center"
+            android:id="@+id/txtbienvenido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BIENVENIDO"
+            android:textSize="@dimen/home_bienvenido"
+            />
+        <TextView
+            android:gravity="center"
+            android:id="@+id/home_fullname"
+            android:layout_width="wrap_content"
+            android:textSize="@dimen/home_bienvenido"
+            android:layout_height="wrap_content"
+            android:text="USERNAM"/>
+    </LinearLayout>
+
+</FrameLayout>
