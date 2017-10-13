@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.victorsaico.shareddrawer.R;
 import com.vstechlab.easyfonts.EasyFonts;
@@ -37,12 +38,16 @@ private TextView txtbienvenido,home_fullname;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         home_fullname.setText(sharedPreferences.getString("fullname", null));
         String valor = sharedPreferences.getString("preferencitexto", null);
-        if(valor.equals("1")){
-            changeTexto1();
-        }else if (valor.equals("2")) {
-            changeTexto2();
-        }else if(valor.equals("3")){
-            changeTexto3();
+        if(valor != null){
+            if(valor.equals("1")){
+                changeTexto1();
+            }else if (valor.equals("2")) {
+                changeTexto2();
+            }else if(valor.equals("3")){
+                changeTexto3();
+            }
+        }else {
+            Toast.makeText(getActivity(), "ninguna fuente seleccionada", Toast.LENGTH_SHORT).show();
         }
         return view;
     }

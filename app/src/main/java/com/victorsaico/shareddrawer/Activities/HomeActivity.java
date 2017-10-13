@@ -39,7 +39,6 @@ public class HomeActivity extends AppCompatActivity{
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        //imprimirDrawer();
         if(navigationView != null ){
             prepararDrawer(navigationView);
             seleccionarItem(navigationView.getMenu().getItem(0));
@@ -49,20 +48,18 @@ public class HomeActivity extends AppCompatActivity{
 
     }
     private void imprimirDrawer(){
-       sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String fullname = sharedPreferences.getString("fullname", null);
+      sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+       String fullname = sharedPreferences.getString("fullname", null);
        txtfullname.setText(fullname);
    }
     private void prepararDrawer(NavigationView navigationView){
         navigationView.setNavigationItemSelectedListener(
-
                 new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 menuItem.setChecked(true);
                 seleccionarItem(menuItem);
                 drawerLayout.closeDrawers();
-
                 return true;
             }
         });

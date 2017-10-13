@@ -112,7 +112,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_cambiarcontrasena" />
+                android:src="@drawable/ic_cambiarcontrasena"
+                />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

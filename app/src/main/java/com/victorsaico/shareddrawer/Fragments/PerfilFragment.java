@@ -1,5 +1,6 @@
 package com.victorsaico.shareddrawer.Fragments;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -7,8 +8,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.victorsaico.shareddrawer.Activities.MyPreferencesActivity;
 import com.victorsaico.shareddrawer.R;
 import com.vstechlab.easyfonts.EasyFonts;
 
@@ -18,12 +22,11 @@ public class PerfilFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private TextView usernameText,informacion_del_usuario,texto_password,titulo_contrasena;
     private TextView nameText;
+    private ImageView btncambiarcontra;
 
     public PerfilFragment() {
+
     }
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,16 +43,27 @@ public class PerfilFragment extends Fragment {
         informacion_del_usuario = view.findViewById(R.id.informacion_del_usuario);
         texto_password = view.findViewById(R.id.texto_password);
         titulo_contrasena = view.findViewById(R.id.titulo_contrasena);
-
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        btncambiarcontra = (ImageView) view.findViewById(R.id.icono_indicador_derecho);
+        btncambiarcontra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                 Intent intent = new Intent(getActivity(), MyPreferencesActivity.class);
+                startActivity(intent);
+            }
+        });
         imprimirValores();
         String valor = sharedPreferences.getString("preferencitexto", null);
-        if(valor.equals("1")){
-            changeTexto1();
-        }else if (valor.equals("2")) {
-            changeTexto2();
-        }else if(valor.equals("3")){
-            changeTexto3();
+        if(valor != null){
+            if(valor.equals("1")){
+                changeTexto1();
+            }else if (valor.equals("2")) {
+                changeTexto2();
+            }else if(valor.equals("3")){
+                changeTexto3();
+            }
+        }else {
+            Toast.makeText(getActivity(), "ninguna fuente seleccionada", Toast.LENGTH_SHORT).show();
         }
         return view;
     }
