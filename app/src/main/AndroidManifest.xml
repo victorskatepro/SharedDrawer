@@ -3,14 +3,17 @@
           package="com.victorsaico.shareddrawer">
 
     <application
+        android:name="com.orm.SugarApp"
         android:allowBackup="true"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.MainActivity">
+        <meta-data android:name="DATABASE" android:value="sugarormapp.db" />
+        <meta-data android:name="VERSION" android:value="2" />
+        <meta-data android:name="QUERY_LOG" android:value="true" />
+        <meta-data  android:name="DOMAIN_PACKAGE_NAME" android:value="com.victorsaico.shareddrawer.models" />
 
-        </activity>
         <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
