@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,8 +17,11 @@ import com.victorsaico.shareddrawer.R;
 import com.victorsaico.shareddrawer.Repositories.UserRepository;
 import com.victorsaico.shareddrawer.models.User;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class LoginActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
+    private static final String TAG = LoginActivity.class.getSimpleName();
 
     private EditText usernameInput;
     private EditText passwordInput;
@@ -36,9 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         loginPanel = findViewById(R.id.login_panel);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        // username remember
-
+        
 
         // islogged remember
         if(sharedPreferences.getBoolean("islogged", false)){
@@ -47,8 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
     public void callLogin(View view){
-        loginPanel.setVisibility(View.GONE);
-        progressBar.setVisibility(View.VISIBLE);
+
 
         email = usernameInput.getText().toString();
         password = passwordInput.getText().toString();
@@ -59,16 +60,32 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         //Login logic
+        boolean respuesta = UserRepository.validar(email);
+        Log.d(TAG, "respues"+respuesta);
         user = UserRepository.login(email, password);
-        if(user == null){
-            //UserRepository.create(email, email, password);
+        if(respuesta == true ){
+            if(user == null){
+                new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Oops...")
+                        .setContentText("Correo o contraseña erronea")
+                        .show();
+            }else{
+                Log.d(TAG,"GUARDANDO PRERENCES");
+                guardarPreferences();
+            }
+        }else {
+            Log.d(TAG,"creando");
+            crearUsuario();
+
+        }
+       // guardarPreferences();
+    }
+    private void crearUsuario(){
             showDialog();
             loginPanel.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);
             return;
-        }
 
-        guardarPreferences();
     }
     private void goDashboard(){
         startActivity(new Intent(this, HomeActivity.class));

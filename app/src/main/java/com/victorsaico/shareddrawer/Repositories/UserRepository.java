@@ -20,13 +20,28 @@ public class UserRepository {
     //}
 
    public static List<User> users = SugarRecord.listAll(User.class);
+
    public static User login(String email, String password) {
+       boolean respuesta=true;
        for (User user : users) {
            if (user.getFullname().equalsIgnoreCase(email) && user.getPassword().equals(password)) {
                return user;
            }
        }
        return null;
+   }
+   public static boolean validar(String fullname){
+       boolean respuesta = true;
+       for (User user:users){
+           if(fullname.equals(user.getFullname())){
+               respuesta = true;
+               return respuesta;
+           }else {
+               respuesta = false;
+               return respuesta;
+           }
+       }
+       return respuesta;
    }
 
   //  public static User getUser(String username){
